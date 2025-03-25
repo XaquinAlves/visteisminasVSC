@@ -1,5 +1,7 @@
 package gal.pazodamerce.visteisminas.view;
 
+import gal.pazodamerce.visteisminas.controller.App;
+
 public final class VisTeisMinas {
 
     // Private constructor to prevent instantiation
@@ -13,7 +15,11 @@ public final class VisTeisMinas {
      * @param args Argumentos da liña de comandos (non utilizados).
      */
     public static void main(final String[] args) {
-        VisTeisMinasMenu visTeisMinasMenu = new VisTeisMinasMenu();
-        visTeisMinasMenu.startNewGame();
+        if (args.length > 0 && args[0].equals("texto")) {
+            VisTeisMinasMenu visTeisMinasMenu = new VisTeisMinasMenu();
+            visTeisMinasMenu.startNewGame();
+        } else {
+            App.main(args);
+        }
     }
 }

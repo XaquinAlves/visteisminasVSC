@@ -14,6 +14,16 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     /**
+     * The minimum width of the application window.
+     */
+    private static final int MIN_WIDTH = 800;
+
+    /**
+     * The minimum height of the application window.
+     */
+    private static final int MIN_HEIGHT = 600;
+
+    /**
      * The main scene of the application.
      */
     private static Scene scene;
@@ -25,7 +35,7 @@ public class App extends Application {
      */
     @Override
     public void start(final Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("primary"), MIN_WIDTH, MIN_HEIGHT);
         stage.setScene(scene);
         stage.show();
     }

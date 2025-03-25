@@ -3,12 +3,13 @@
  * xogo do buscaminas.
  *
  * <p>
- * Inclúe a clase {@link gal.pazodamerce.visteisminas.view.VisTeisMinasMenu}, que implementa
- * a interface en modo texto para interactuar co usuario.
+ * Inclúe a clase {@link gal.pazodamerce.visteisminas.view.VisTeisMinasMenu},
+ * que implementa a interface en modo texto para interactuar co usuario.
  * </p>
  * <p>
- * Inclúe a clase {@link gal.pazodamerce.visteisminas.view.VisTeisMinas}, que pode recibir o
- * parametro texto, e inica a aplicacion coa interfaz correspondente
+ * Tamém inclúe a clase {@link gal.pazodamerce.visteisminas.view.VisTeisMinas},
+ * que pode recibir o parametro texto, e inica a aplicacion coa interfaz
+ * correspondente.
  * </p>
  *
  * @author Xaquin Alves Gonzalez
