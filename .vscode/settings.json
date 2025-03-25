@@ -1,0 +1,5 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.checkstyle.configuration": "/sun_checks.xml",
+    "java.dependency.syncWithFolderExplorer": true
+}
