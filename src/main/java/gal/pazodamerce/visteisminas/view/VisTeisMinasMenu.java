@@ -103,6 +103,7 @@ public class VisTeisMinasMenu {
         for (int i = 0; i < panelRows; i++) {
 
             String row = Integer.toString(i);
+            String rowBelow = "-";
             for (int j = 0; j < panelColumns; j++) {
 
                 switch (game.getCell(i, j).getState()) {
@@ -125,10 +126,12 @@ public class VisTeisMinasMenu {
                     default ->
                         System.out.println("");
                 }
+                rowBelow = rowBelow.concat("--");
             }
             row = row.concat("|");
+            rowBelow = rowBelow.concat("-");
             System.out.println(row);
-            System.out.println(" -------------");
+            System.out.println(rowBelow);
         }
     }
 
