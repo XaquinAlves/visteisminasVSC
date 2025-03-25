@@ -15,62 +15,17 @@ public class VisTeisMinasMenu {
     /**
      * Nivel de dificultad fácil.
      */
-    private static final int EASY_LEVEL = 1;
-
+    public static final int EASY_LEVEL = 1;
     /**
      * Nivel de dificultad media.
      */
-    private static final int MEDIUM_LEVEL = 2;
+    public static final int MEDIUM_LEVEL = 2;
 
     /**
      * Nivel de dificultad alta.
      */
-    private static final int HARD_LEVEL = 3;
+    public static final int HARD_LEVEL = 3;
 
-    /**
-     * Número de filas en dificultad baja.
-     */
-    private static final int EASY_PANEL_ROWS = 6;
-
-    /**
-     * Número de filas en dificultad media.
-     */
-    private static final int MEDIUM_PANEL_ROWS = 8;
-
-    /**
-     * Número de filas en dificultad alta.
-     */
-    private static final int HARD_PANEL_ROWS = 10;
-
-    /**
-     * Número de columnas en dificultad baja.
-     */
-    private static final int EASY_PANEL_COLUMNS = 6;
-
-    /**
-     * Número de columnas en dificultad media.
-     */
-    private static final int MEDIUM_PANEL_COLUMNS = 8;
-
-    /**
-     * Número de columnas en dificultad alta.
-     */
-    private static final int HARD_PANEL_COLUMNS = 10;
-
-    /**
-     * Número de minas en dificultad baja.
-     */
-    private static final int EASY_PANEL_MINES = 8;
-
-    /**
-     * Número de minas en dificultad media.
-     */
-    private static final int MEDIUM_PANEL_MINES = 20;
-
-    /**
-     * Número de minas en dificultad alta.
-     */
-    private static final int HARD_PANEL_MINES = 40;
 
     /**
      * Número de filas del panel configurado.
@@ -160,19 +115,19 @@ public class VisTeisMinasMenu {
             //Establece as filas colmnass e minas en funcion da dificultade
             switch (choice) {
                 case EASY_LEVEL -> { //Dificultade baixa
-                    panelRows = EASY_PANEL_ROWS;
-                    panelColumns = EASY_PANEL_COLUMNS;
-                    panelMines = EASY_PANEL_MINES;
+                    panelRows = Game.EASY_PANEL_ROWS;
+                    panelColumns = Game.EASY_PANEL_COLUMNS;
+                    panelMines = Game.EASY_PANEL_MINES;
                 }
                 case MEDIUM_LEVEL -> { //Dificultade media
-                    panelRows = MEDIUM_PANEL_ROWS;
-                    panelColumns = MEDIUM_PANEL_COLUMNS;
-                    panelMines = MEDIUM_PANEL_MINES;
+                    panelRows = Game.MEDIUM_PANEL_ROWS;
+                    panelColumns = Game.MEDIUM_PANEL_COLUMNS;
+                    panelMines = Game.MEDIUM_PANEL_MINES;
                 }
                 case HARD_LEVEL -> { //Dificultade alta
-                    panelRows = HARD_PANEL_ROWS;
-                    panelColumns = HARD_PANEL_COLUMNS;
-                    panelMines = HARD_PANEL_MINES;
+                    panelRows = Game.HARD_PANEL_ROWS;
+                    panelColumns = Game.HARD_PANEL_COLUMNS;
+                    panelMines = Game.HARD_PANEL_MINES;
                 }
                 default -> {
                 }

@@ -13,6 +13,50 @@ import gal.pazodamerce.visteisminas.model.Cell;
 public class Game {
 
     /**
+     * Número de filas en dificultad baja.
+     */
+    public static final int EASY_PANEL_ROWS = 6;
+
+    /**
+     * Número de filas en dificultad media.
+     */
+    public static final int MEDIUM_PANEL_ROWS = 8;
+
+    /**
+     * Número de filas en dificultad alta.
+     */
+    public static final int HARD_PANEL_ROWS = 10;
+
+    /**
+     * Número de columnas en dificultad baja.
+     */
+    public static final int EASY_PANEL_COLUMNS = 6;
+
+    /**
+     * Número de columnas en dificultad media.
+     */
+    public static final int MEDIUM_PANEL_COLUMNS = 8;
+
+    /**
+     * Número de columnas en dificultad alta.
+     */
+    public static final int HARD_PANEL_COLUMNS = 10;
+
+    /**
+     * Número de minas en dificultad baja.
+     */
+    public static final int EASY_PANEL_MINES = 8;
+
+    /**
+     * Número de minas en dificultad media.
+     */
+    public static final int MEDIUM_PANEL_MINES = 20;
+
+    /**
+     * Número de minas en dificultad alta.
+     */
+    public static final int HARD_PANEL_MINES = 40;
+    /**
      * Número de filas do taboleiro.
      */
     private final int boardRows;
