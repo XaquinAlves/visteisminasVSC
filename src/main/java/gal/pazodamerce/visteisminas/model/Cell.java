@@ -1,4 +1,4 @@
-package gal.pazodamerce.model;
+package gal.pazodamerce.visteisminas.model;
 
 /**
  * Clase que representa unha celda da pantalla de xogo do buscaminas.

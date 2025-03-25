@@ -1,4 +1,4 @@
-package gal.pazodamerce.view;
+package gal.pazodamerce.visteisminas.view;
 
 public final class VisTeisMinas {
 
