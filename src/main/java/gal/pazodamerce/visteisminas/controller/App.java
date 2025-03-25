@@ -1,4 +1,4 @@
-package gal.pazodamerce;
+package gal.pazodamerce.visteisminas.controller;
 
 import java.io.IOException;
 

@@ -57,33 +57,6 @@ public class Cell {
     }
 
     /**
-     * Obten o valor equivalente a estar TAPADA.
-     *
-     * @return valor de estado cando TAPADA
-     */
-    public static int getTapada() {
-        return TAPADA;
-    }
-
-    /**
-     * Obten o valor equivalente a estar MARCADA.
-     *
-     * @return valor de estado cando MARCADA
-     */
-    public static int getMarcada() {
-        return MARCADA;
-    }
-
-    /**
-     * Obten o valor equivalente a estar DESTAPADA.
-     *
-     * @return valor de estado cando DESTAPADA
-     */
-    public static int getDestapada() {
-        return DESTAPADA;
-    }
-
-    /**
      * @return se esta minada
      */
     public boolean isMined() {

@@ -48,6 +48,24 @@ public class Game {
     }
 
     /**
+     * Obtén o número de filas do taboleiro.
+     *
+     * @return o número de filas do taboleiro
+     */
+    public int getBoardRows() {
+        return boardRows;
+    }
+
+    /**
+     * Obtén o número de columnas do taboleiro.
+     *
+     * @return o número de columnas do taboleiro
+     */
+    public int getBoardColumns() {
+        return boardColumns;
+    }
+
+    /**
      * Devolve a celda da posicion dada.
      *
      * @param row posicion nas filas
@@ -122,12 +140,12 @@ public class Game {
      * @param cell celda a destapar
      */
     public void openCell(final Cell cell) {
-        cell.setState(Cell.getDestapada());
+        cell.setState(Cell.DESTAPADA);
 
         if (getAdjacentMines(cell) == 0) {
             ArrayList<Cell> adjacentCells = getAdjacentCells(cell);
             for (int i = 0; i < adjacentCells.size(); i++) {
-                adjacentCells.get(i).setState(Cell.getDestapada());
+                adjacentCells.get(i).setState(Cell.DESTAPADA);
             }
         }
     }
@@ -141,7 +159,7 @@ public class Game {
         for (Cell[] cells1 : cells) {
             for (Cell cell : cells1) {
                 if (cell.isMined()) {
-                    cell.setState(Cell.getDestapada());
+                    cell.setState(Cell.DESTAPADA);
                 }
             }
         }
@@ -156,7 +174,7 @@ public class Game {
     public boolean checkCellsToOpen() {
         for (Cell[] cells1 : cells) {
             for (Cell cell : cells1) {
-                if (!cell.isMined() && cell.getState() != Cell.getDestapada()) {
+                if (!cell.isMined() && cell.getState() != Cell.DESTAPADA) {
                     return true;
                 }
             }

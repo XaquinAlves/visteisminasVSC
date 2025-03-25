@@ -110,10 +110,10 @@ public class VisTeisMinasMenu {
                     case Cell.TAPADA -> {
                         row = row.concat("| ");
                     }
-                    case Cell.DESTAPADA -> {
+                    case Cell.MARCADA -> {
                         row = row.concat("|X");
                     }
-                    case Cell.MARCADA -> {
+                    case Cell.DESTAPADA -> {
                         if (game.getCell(i, j).isMined()) {
                             row = row.concat("|!");
                         } else {
@@ -208,34 +208,39 @@ public class VisTeisMinasMenu {
         char choice = scanner.nextLine().charAt(0);
 
         switch (choice) {
-            case 's' -> {
+            case 's' -> { //Sair
                 failed = true;
             }
-            case 'm' ->
+            case 'm' -> //Marcar celda
                 selectCell(game, scanner, "Selecciona a"
-                        + "celda a marcar: ").setState(Cell.getMarcada());
-            case 'd' -> {
+                        + "celda a marcar: ").setState(Cell.MARCADA);
+            case 'd' -> { //Desmarcar celda
                 Cell cell = selectCell(game,
                         scanner, "Selecciona a celda a desmarcar: ");
-                if (cell.getState() == Cell.getTapada()) {
-                    System.out.println("A celda seleccionada non esta marcada");
-                } else if (cell.getState() == Cell.getDestapada()) {
-                    System.out.println("A celda xa esta aberta");
-                } else {
-                    cell.setState(Cell.getMarcada());
+                //Se a celda non esta marcada ou descuberta no se pode desmarcar
+                switch (cell.getState()) {
+                    case Cell.TAPADA ->
+                        System.out.println("A celda"
+                                + " seleccionada non esta marcada");
+                    case Cell.DESTAPADA ->
+                        System.out.println("A "
+                                + "celda xa esta aberta");
+                    default -> //Se a celda esta marcada desmarcamola
+                        cell.setState(Cell.TAPADA);
                 }
             }
-            case 'a' -> {
+            case 'a' -> { //Abrir celda
                 Cell cell = selectCell(game, scanner,
                         "Selecciona unha celda para abrir: ");
                 game.openCell(cell);
+                //Se a celda esta minada a partida acaba
                 if (cell.isMined()) {
                     game.openAllMines();
                     showPanel(game);
                     failed = true;
                 }
             }
-            default -> {
+            default -> { //Se se introduce unha opcion incorrecta
                 showIncorrectInput();
             }
         }
