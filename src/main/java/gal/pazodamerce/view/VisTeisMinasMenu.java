@@ -13,23 +13,79 @@ import gal.pazodamerce.model.Cell;
 public class VisTeisMinasMenu {
 
     /**
-     * Número de filas del panel.
+     * Nivel de dificultad fácil.
      */
-    private static final int DEFAULT_PANEL_ROWS = 6;
+    private static final int EASY_LEVEL = 1;
 
     /**
-     * Número de columnas del panel.
+     * Nivel de dificultad media.
      */
-    private static final int DEFAULT_PANEL_COLUMNS = 6;
+    private static final int MEDIUM_LEVEL = 2;
 
     /**
-     * Número de minas en el panel.
+     * Nivel de dificultad alta.
      */
-    private static final int DEFAULT_PANEL_MINES = 8;
+    private static final int HARD_LEVEL = 3;
 
-    private int panelRows = DEFAULT_PANEL_ROWS;
-    private int panelColumns = DEFAULT_PANEL_COLUMNS;
-    private int panelMines = DEFAULT_PANEL_MINES;
+    /**
+     * Número de filas en dificultad baja.
+     */
+    private static final int EASY_PANEL_ROWS = 6;
+
+    /**
+     * Número de filas en dificultad media.
+     */
+    private static final int MEDIUM_PANEL_ROWS = 8;
+
+    /**
+     * Número de filas en dificultad alta.
+     */
+    private static final int HARD_PANEL_ROWS = 10;
+
+    /**
+     * Número de columnas en dificultad baja.
+     */
+    private static final int EASY_PANEL_COLUMNS = 6;
+
+    /**
+     * Número de columnas en dificultad media.
+     */
+    private static final int MEDIUM_PANEL_COLUMNS = 8;
+
+    /**
+     * Número de columnas en dificultad alta.
+     */
+    private static final int HARD_PANEL_COLUMNS = 10;
+
+    /**
+     * Número de minas en dificultad baja.
+     */
+    private static final int EASY_PANEL_MINES = 8;
+
+    /**
+     * Número de minas en dificultad media.
+     */
+    private static final int MEDIUM_PANEL_MINES = 20;
+
+    /**
+     * Número de minas en dificultad alta.
+     */
+    private static final int HARD_PANEL_MINES = 40;
+
+    /**
+     * Número de filas del panel configurado.
+     */
+    private int panelRows;
+
+    /**
+     * Número de columnas del panel configurado.
+     */
+    private int panelColumns;
+
+    /**
+     * Número de minas en el panel configurado.
+     */
+    private int panelMines;
 
     /**
      * Mostra o panel de minas.
@@ -48,23 +104,26 @@ public class VisTeisMinasMenu {
 
             String row = Integer.toString(i);
             for (int j = 0; j < panelColumns; j++) {
-                /*
-                1 tapada
-                2 marcada
-                3 destapada
-                 */
+
                 switch (game.getCell(i, j).getState()) {
-                    case Cell.TAPADA -> row = row.concat("| ");
-                    case Cell.DESTAPADA -> row = row.concat("|X");
+                    case Cell.TAPADA -> {
+                        row = row.concat("| ");
+                    }
+                    case Cell.DESTAPADA -> {
+                        row = row.concat("|X");
+                    }
                     case Cell.MARCADA -> {
                         if (game.getCell(i, j).isMined()) {
                             row = row.concat("|!");
                         } else {
-                            row = row.concat("|"
-                                + game.getAdjacentMines(game.getCell(i, j)));
+                            row = row.concat("|");
+                            String num = String.valueOf(game.getAdjacentMines(
+                                    game.getCell(i, j)));
+                            row = row.concat(num);
                         }
                     }
-                    default -> System.out.println("");
+                    default ->
+                        System.out.println("");
                 }
             }
             row = row.concat("|");
@@ -93,40 +152,68 @@ public class VisTeisMinasMenu {
                 System.out.print("Eleccion: ");
                 choice = scanner.nextInt();
                 scanner.nextLine();
-            } while (choice < 1 || choice > 3);
+            } while (choice < EASY_LEVEL || choice > HARD_LEVEL);
 
-            if (choice == 2) {
-                panelRows = panelColumns = 8;
-                panelMines = 20;
-            } else if (choice == 3) {
-                panelRows = panelColumns = 10;
-                panelMines = 40;
+            switch (choice) {
+                case EASY_LEVEL -> {
+                    panelRows = EASY_PANEL_ROWS;
+                    panelColumns = EASY_PANEL_COLUMNS;
+                    panelMines = EASY_PANEL_MINES;
+                }
+                case MEDIUM_LEVEL -> {
+                    panelRows = MEDIUM_PANEL_ROWS;
+                    panelColumns = MEDIUM_PANEL_COLUMNS;
+                    panelMines = MEDIUM_PANEL_MINES;
+                }
+                case HARD_LEVEL -> {
+                    panelRows = HARD_PANEL_ROWS;
+                    panelColumns = HARD_PANEL_COLUMNS;
+                    panelMines = HARD_PANEL_MINES;
+                }
+                default -> {
+                }
             }
 
             Game game = new Game(panelRows, panelColumns, panelMines);
             boolean failed = false;
 
             do {
-                failed = playTurn(game, scanner, failed);
+                failed = playTurn(game, scanner);
             } while (game.checkCellsToOpen() && !failed);
 
         } while (nextGame(scanner));
     }
 
-    private boolean playTurn(Game game, Scanner scanner, boolean failed) {
+    /**
+     * Metodo que executa 1 turno, mostrando o panel e pedindo unha accion de
+     * forma repetitiva ata que acabe a partida.
+     *
+     * @param game
+     * @param scanner
+     * @return se a partida acabou
+     */
+    private boolean playTurn(final Game game,
+            final Scanner scanner) {
+        boolean failed = false;
         System.out.println("---Estas xogando ao VisteisMinas---");
         System.out.println("---  version por: Xaquin Alves  ---");
         showPanel(game);
-        System.out.print("Introduce a accion(s:Sair, m:Marcar unha celda, d: Desmarcar unha celda, a:Abrir unha celda): ");
+
+        System.out.print("Introduce a accion(s:Sair,"
+                + " m:Marcar unha celda, d: Desmarcar unha"
+                + "celda, a:Abrir unha celda): ");
         char choice = scanner.nextLine().charAt(0);
 
         switch (choice) {
-            case 's' ->
+            case 's' -> {
                 failed = true;
+            }
             case 'm' ->
-                selectCell(game, scanner, "Selecciona a celda a marcar: ").setState(Cell.getMarcada());
+                selectCell(game, scanner, "Selecciona a"
+                        + "celda a marcar: ").setState(Cell.getMarcada());
             case 'd' -> {
-                Cell cell = selectCell(game, scanner, "Selecciona a celda a desmarcar: ");
+                Cell cell = selectCell(game,
+                        scanner, "Selecciona a celda a desmarcar: ");
                 if (cell.getState() == Cell.getTapada()) {
                     System.out.println("A celda seleccionada non esta marcada");
                 } else if (cell.getState() == Cell.getDestapada()) {
@@ -136,7 +223,8 @@ public class VisTeisMinasMenu {
                 }
             }
             case 'a' -> {
-                Cell cell = selectCell(game, scanner, "Selecciona unha celda para abrir: ");
+                Cell cell = selectCell(game, scanner,
+                        "Selecciona unha celda para abrir: ");
                 game.openCell(cell);
                 if (cell.isMined()) {
                     game.openAllMines();
@@ -144,20 +232,24 @@ public class VisTeisMinasMenu {
                     failed = true;
                 }
             }
+            default -> {
+                showIncorrectInput();
+            }
         }
         return failed;
     }
 
     /**
      * Usado para pedir ao usuario que selecione unha celda, devolvendo a celda
-     * seleccionada
+     * seleccionada.
      *
      * @param game referencia a partida actual
      * @param scanner para pedir datos
      * @param text mensaxe inicial do metodo
      * @return celda seleccionada
      */
-    private Cell selectCell(Game game, Scanner scanner, String text) {
+    private Cell selectCell(final Game game,
+            final Scanner scanner, final String text) {
         System.out.println(text);
         System.out.print("Introduce a Fila:");
         int row = scanner.nextInt();
@@ -167,8 +259,10 @@ public class VisTeisMinasMenu {
         int column = scanner.nextInt();
         scanner.nextLine();
 
-        while (row >= panelRows || row < 0 || column >= panelColumns || column < 0) {
-            System.out.println("Posicion non valida. Introduza outra posicion: ");
+        while (row >= panelRows || row < 0
+                || column >= panelColumns || column < 0) {
+            System.out.println("Posicion non valida."
+                    + "Introduza outra posicion: ");
             System.out.print("Introduce a Fila:");
             row = scanner.nextInt();
             scanner.nextLine();
@@ -183,15 +277,22 @@ public class VisTeisMinasMenu {
 
     /**
      * Pregunta se se quere xogar unha nova partida, devolvendo un booleano en
-     * funcion da resposta
+     * funcion da resposta.
      *
      * @param scanner para pedir datos
      * @return se se quere xogar outra partida
      */
-    private boolean nextGame(Scanner scanner) {
+    private boolean nextGame(final Scanner scanner) {
         System.out.print("Desexa xogar outra partida?(s/n):");
         char choice = scanner.nextLine().charAt(0);
 
         return choice == 's' || choice == 'S';
+    }
+
+    /**
+     * Informa ao usuario de que introduciu unha opcion incorrecta.
+     */
+    private void showIncorrectInput() {
+        System.out.println("Introduza unha opción válida");
     }
 }
