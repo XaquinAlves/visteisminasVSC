@@ -145,30 +145,31 @@ public class VisTeisMinasMenu {
 
         do {
             int choice;
+            //Pide ao usuario que seleccione un nivel de dificultade
             System.out.println("""
                     Seleccione un nivel de dificultade:
                     1.Baixo
                     2.Medio
                     3.Alto""");
-
+            //Recolle a eleccion e volve a pedila ata que sexa valida
             do {
                 System.out.print("Eleccion: ");
                 choice = scanner.nextInt();
                 scanner.nextLine();
             } while (choice < EASY_LEVEL || choice > HARD_LEVEL);
-
+            //Establece as filas colmnass e minas en funcion da dificultade
             switch (choice) {
-                case EASY_LEVEL -> {
+                case EASY_LEVEL -> { //Dificultade baixa
                     panelRows = EASY_PANEL_ROWS;
                     panelColumns = EASY_PANEL_COLUMNS;
                     panelMines = EASY_PANEL_MINES;
                 }
-                case MEDIUM_LEVEL -> {
+                case MEDIUM_LEVEL -> { //Dificultade media
                     panelRows = MEDIUM_PANEL_ROWS;
                     panelColumns = MEDIUM_PANEL_COLUMNS;
                     panelMines = MEDIUM_PANEL_MINES;
                 }
-                case HARD_LEVEL -> {
+                case HARD_LEVEL -> { //Dificultade alta
                     panelRows = HARD_PANEL_ROWS;
                     panelColumns = HARD_PANEL_COLUMNS;
                     panelMines = HARD_PANEL_MINES;
@@ -176,14 +177,22 @@ public class VisTeisMinasMenu {
                 default -> {
                 }
             }
-
+            //Crea unha nova partida
             Game game = new Game(panelRows, panelColumns, panelMines);
-            boolean failed = false;
-
+            boolean failed;
+            //Executa a partida ata que acabe
             do {
                 failed = playTurn(game, scanner);
             } while (game.checkCellsToOpen() && !failed);
-
+            //Mostra se a partida foi gañada ou perdida e o panel final
+            if (failed) {
+                System.out.println("Parida perdida");
+            } else {
+                System.out.println("Parida gañada");
+            }
+            showPanel(game);
+            //Pregunta se se quere xogar outra partida
+            //Se non remata a execucion do programa
         } while (nextGame(scanner));
     }
 
@@ -236,7 +245,6 @@ public class VisTeisMinasMenu {
                 //Se a celda esta minada a partida acaba
                 if (cell.isMined()) {
                     game.openAllMines();
-                    showPanel(game);
                     failed = true;
                 }
             }

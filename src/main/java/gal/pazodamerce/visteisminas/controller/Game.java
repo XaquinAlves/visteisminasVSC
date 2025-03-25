@@ -154,8 +154,6 @@ public class Game {
      * Destapa todas as celdas con minas, usado cando acaba a partida.
      */
     public void openAllMines() {
-        System.out.println("Parida perdida: ");
-
         for (Cell[] cells1 : cells) {
             for (Cell cell : cells1) {
                 if (cell.isMined()) {
