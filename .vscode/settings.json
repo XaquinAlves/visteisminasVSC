@@ -1,5 +1,5 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
-    "java.checkstyle.configuration": "/sun_checks.xml",
+    "java.checkstyle.configuration": "/home/xaquin.alvesgonzalez/VSC-Java/sun_checks.xml",
     "java.dependency.syncWithFolderExplorer": true
 }
